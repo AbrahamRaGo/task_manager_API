@@ -6,7 +6,7 @@ RSpec.describe "Categories endpoint", type: :request do
   describe "GET /caegories" do
     describe "Response without data in db" do
       before { get '/categories'}
-      it "should return OK without data in db" do
+      it "should return OK" do
         payload = JSON.parse(response.body)
         expect(payload).to be_empty
         expect(response).to have_http_status(200)
@@ -16,7 +16,7 @@ RSpec.describe "Categories endpoint", type: :request do
       # ? con el signo de adminracion se indica que se ejecute early, sino se pone se ejecutaria hasta que la variable categories sea utilizada
       let!(:categories) { create_list(:category, 5) }
       before { get '/categories'}
-      it "should return OK with data in db" do
+      it "should return OK" do
         payload = JSON.parse(response.body)
         expect(payload.size).to eq(categories.size)
         expect(response).to have_http_status(200)
