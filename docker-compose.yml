@@ -3,7 +3,7 @@ services:
   db:
     image: postgres
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - ./tmp/db:/var/lib/postgresql/db
     environment:
       POSTGRES_PASSWORD: password
   web:
