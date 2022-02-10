@@ -24,12 +24,17 @@ RSpec.describe "Tasks endpoint" , type: :request do
 
   #* get para show
   describe "GET /tasks/{id}" do
-    let!(:task) { create(:task) }
+    let!(:task) {create(:task)}
     before { get "/tasks/#{task.id}"}
     it "should return a task" do
       payload = JSON.parse(response.body)
       expect(payload).not_to be_empty
       expect(payload["id"]).to eq(task.id)
+      expect(payload["name"]).to eq(task.name)
+      expect(payload["description"]).to eq(task.description)
+      # expect(payload["users"]["id"]).to eq(task.participants.id)
+      # expect(payload["users"]["name"]).to eq(task.participants.name)
+      # expect(payload["users"]["email"]).to eq(task.participants.email)
       expect(response).to have_http_status(:ok)
     end
   end

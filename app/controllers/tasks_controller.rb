@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
-  rescue_from Exception do |err|
-    render json: {error: err.message}, status: :internal_error
-  end
+  # rescue_from Exception do |err|
+  #   render json: {error: err.message}, status: :internal_error
+  # end
 
   rescue_from ActiveRecord::RecordInvalid do |err|
     render json: {error: err.message}, status: :unprocessable_entity
@@ -14,6 +14,7 @@ class TasksController < ApplicationController
 
   def show
     @task = Task.find(params[:id])
+    # @participants = Participant.joins(:user).where('task_id = ?', params[:id])
     render json: @task, status: :ok
   end
 
